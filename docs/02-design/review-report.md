@@ -1,11 +1,14 @@
-# Documentation Review Report
-
-**Project:** Gia Phả Điện Tử - Chi tộc Đặng Đình
-**Reviewer:** @reviewer
-**Date:** 2026-02-24
-**Scope:** Stage 00, 01, 02
-
 ---
+project: AncestorTree
+path: docs/02-design/review-report.md
+type: design
+version: 1.0.0
+updated: 2026-02-24
+owner: "@reviewer"
+status: approved
+---
+
+# Documentation Review Report
 
 ## 1. Executive Summary
 

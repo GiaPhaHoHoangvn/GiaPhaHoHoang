@@ -1,12 +1,14 @@
-# Sprint Plan - Gia Phả Điện Tử
-
-**Project:** Gia Phả Điện Tử - Chi tộc Đặng Đình
-**Version:** 1.0.0
-**Date:** 2026-02-24
-**Author:** @pm
-**Total Duration:** 5 Sprints (~25 working days)
-
 ---
+project: AncestorTree
+path: docs/04-build/SPRINT-PLAN.md
+type: build
+version: 1.0.0
+updated: 2026-02-24
+owner: "@pm"
+status: approved
+---
+
+# Sprint Plan - Gia Phả Điện Tử
 
 ## 📅 Sprint Overview
 

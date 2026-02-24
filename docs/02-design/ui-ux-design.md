@@ -1,12 +1,14 @@
-# UI/UX Design Document
-
-**Project:** Gia Phả Điện Tử - Chi tộc Đặng Đình
-**Version:** 1.0.0
-**Date:** 2026-02-24
-**Stage:** 02-DESIGN
-**Author:** @fullstack
-
 ---
+project: AncestorTree
+path: docs/02-design/ui-ux-design.md
+type: design
+version: 1.0.0
+updated: 2026-02-24
+owner: "@fullstack"
+status: approved
+---
+
+# UI/UX Design Document
 
 ## 1. Design Principles
 

@@ -1,3 +1,11 @@
+/**
+ * @project AncestorTree
+ * @file src/app/layout.tsx
+ * @description Root layout with providers (Auth, Tooltip, Toaster)
+ * @version 1.0.0
+ * @updated 2026-02-24
+ */
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";

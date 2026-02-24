@@ -1,12 +1,14 @@
-# Technical Design Document (TDD)
-
-**Project:** Gia Phả Điện Tử - Chi tộc Đặng Đình
-**Version:** 1.0.0
-**Date:** 2026-02-24
-**Stage:** 02-DESIGN
-**Author:** @dev-team
-
 ---
+project: AncestorTree
+path: docs/02-design/technical-design.md
+type: design
+version: 1.0.0
+updated: 2026-02-24
+owner: "@dev-team"
+status: approved
+---
+
+# Technical Design Document (TDD)
 
 ## 1. Document Control
 

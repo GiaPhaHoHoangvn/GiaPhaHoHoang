@@ -1,12 +1,14 @@
-# Market Research: Genealogy Software
-
-**Project:** Gia Phả Điện Tử
-**Version:** 1.0.0
-**Date:** 2026-02-24
-**Stage:** 00-FOUNDATION
-**Author:** @researcher
-
 ---
+project: AncestorTree
+path: docs/00-foundation/market-research.md
+type: foundation
+version: 1.0.0
+updated: 2026-02-24
+owner: "@researcher"
+status: approved
+---
+
+# Market Research: Genealogy Software
 
 ## 1. Executive Summary
 

@@ -1,3 +1,11 @@
+/**
+ * @project AncestorTree
+ * @file src/components/layout/app-sidebar.tsx
+ * @description Main navigation sidebar component
+ * @version 1.0.0
+ * @updated 2026-02-24
+ */
+
 'use client';
 
 import Link from 'next/link';

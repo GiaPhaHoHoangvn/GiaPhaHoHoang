@@ -1,12 +1,14 @@
-# Problem Statement
-
-**Project:** Gia Phả Điện Tử - Chi tộc Đặng Đình
-**Version:** 1.0.0
-**Date:** 2026-02-24
-**Stage:** 00-FOUNDATION
-**Author:** @pm + @researcher
-
 ---
+project: AncestorTree
+path: docs/00-foundation/problem-statement.md
+type: foundation
+version: 1.0.0
+updated: 2026-02-24
+owner: "@pm, @researcher"
+status: approved
+---
+
+# Problem Statement
 
 ## 1. Problem Overview
 

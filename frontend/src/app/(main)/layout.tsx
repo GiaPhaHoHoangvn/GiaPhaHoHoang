@@ -1,3 +1,11 @@
+/**
+ * @project AncestorTree
+ * @file src/app/(main)/layout.tsx
+ * @description Main app layout with sidebar navigation
+ * @version 1.0.0
+ * @updated 2026-02-24
+ */
+
 import { SidebarProvider, SidebarInset, SidebarTrigger } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/layout/app-sidebar';
 import { Separator } from '@/components/ui/separator';

@@ -1,3 +1,13 @@
+---
+project: AncestorTree
+path: docs/README.md
+type: index
+version: 1.0.0
+updated: 2026-02-24
+owner: "@pm"
+status: approved
+---
+
 # AncestorTree Documentation
 
 > Gia Phả Điện Tử - Chi tộc Đặng Đình, Thạch Lâm, Hà Tĩnh

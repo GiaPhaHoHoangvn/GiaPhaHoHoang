@@ -1,12 +1,14 @@
-# Business Requirements Document (BRD)
-
-**Project:** Gia Phả Điện Tử - Chi tộc Đặng Đình
-**Version:** 1.0.0
-**Date:** 2026-02-24
-**Stage:** 01-PLANNING
-**Author:** @pm
-
 ---
+project: AncestorTree
+path: docs/01-planning/BRD.md
+type: planning
+version: 1.0.0
+updated: 2026-02-24
+owner: "@pm"
+status: approved
+---
+
+# Business Requirements Document (BRD)
 
 ## 1. Document Control
 

@@ -1,3 +1,11 @@
+/**
+ * @project AncestorTree
+ * @file src/app/(main)/page.tsx
+ * @description Homepage with hero, features, stats, and upcoming events
+ * @version 1.0.0
+ * @updated 2026-02-24
+ */
+
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';

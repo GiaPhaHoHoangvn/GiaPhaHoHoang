@@ -1,3 +1,13 @@
+---
+project: AncestorTree
+path: docs/05-test/TEST-PLAN.md
+type: test
+version: 1.0.0
+updated: 2026-02-24
+owner: "@tester"
+status: draft
+---
+
 # Test Plan
 
 ## Overview
