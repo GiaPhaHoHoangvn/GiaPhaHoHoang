@@ -38,8 +38,9 @@ export default function RegisterPage() {
       await signUp(email, password, fullName);
       toast.success('Đăng ký thành công! Vui lòng kiểm tra email để xác nhận.');
       router.push('/login');
-    } catch (error: any) {
-      toast.error(error.message || 'Đăng ký thất bại');
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Đăng ký thất bại';
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }

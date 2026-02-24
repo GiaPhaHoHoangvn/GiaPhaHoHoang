@@ -25,8 +25,9 @@ export default function LoginPage() {
       await signIn(email, password);
       toast.success('Đăng nhập thành công!');
       router.push('/');
-    } catch (error: any) {
-      toast.error(error.message || 'Đăng nhập thất bại');
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Đăng nhập thất bại';
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }

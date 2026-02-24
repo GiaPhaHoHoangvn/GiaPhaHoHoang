@@ -8,7 +8,7 @@
 
 'use client';
 
-import { useMemo, useState, useRef, useCallback, useEffect } from 'react';
+import { useMemo, useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTreeData } from '@/hooks/use-families';
 import { Card, CardContent } from '@/components/ui/card';
@@ -458,6 +458,22 @@ export function FamilyTree() {
   const [showMinimap, setShowMinimap] = useState(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const [containerSize, setContainerSize] = useState({ width: 800, height: 600 });
+
+  // Track container size via ResizeObserver (avoids reading refs during render)
+  const containerCallbackRef = useCallback((node: HTMLDivElement | null) => {
+    if (node) {
+      containerRef.current = node;
+      setContainerSize({ width: node.clientWidth, height: node.clientHeight });
+      const observer = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          setContainerSize({ width: entry.contentRect.width, height: entry.contentRect.height });
+        }
+      });
+      observer.observe(node);
+      return () => observer.disconnect();
+    }
+  }, []);
 
   // Layout
   const layout = useMemo(() => {
@@ -592,14 +608,12 @@ export function FamilyTree() {
     );
   }
 
-  const viewBox = containerRef.current
-    ? {
-        x: -pan.x / scale,
-        y: -pan.y / scale,
-        width: containerRef.current.clientWidth / scale,
-        height: containerRef.current.clientHeight / scale,
-      }
-    : { x: 0, y: 0, width: 800, height: 600 };
+  const viewBox = {
+    x: -pan.x / scale,
+    y: -pan.y / scale,
+    width: containerSize.width / scale,
+    height: containerSize.height / scale,
+  };
 
   return (
     <div className="space-y-4">
@@ -682,7 +696,7 @@ export function FamilyTree() {
 
       {/* Tree container */}
       <div
-        ref={containerRef}
+        ref={containerCallbackRef}
         className="border rounded-lg bg-muted/30 overflow-hidden relative select-none"
         style={{ height: '60vh', cursor: isPanning ? 'grabbing' : 'grab' }}
         onMouseDown={handleMouseDown}

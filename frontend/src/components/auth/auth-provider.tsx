@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState, useCallback, type React
 import { supabase } from '@/lib/supabase';
 import { getProfile } from '@/lib/supabase-data';
 import type { User, Session } from '@supabase/supabase-js';
-import type { Profile, UserRole } from '@/types';
+import type { Profile } from '@/types';
 
 interface AuthContextValue {
   user: User | null;
@@ -21,6 +21,15 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
+async function fetchProfile(userId: string): Promise<Profile | null> {
+  try {
+    return await getProfile(userId);
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+    return null;
+  }
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -28,34 +37,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const refreshProfile = useCallback(async () => {
-    if (!user) {
-      setProfile(null);
-      return;
-    }
-    try {
-      const p = await getProfile(user.id);
-      setProfile(p);
-    } catch (error) {
-      console.error('Error fetching profile:', error);
-      setProfile(null);
-    }
+    if (!user) return;
+    const p = await fetchProfile(user.id);
+    setProfile(p);
   }, [user]);
 
   useEffect(() => {
-    // Initial session check
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    // Initial session check + profile fetch
+    supabase.auth.getSession().then(async ({ data: { session: s } }) => {
+      setSession(s);
+      setUser(s?.user ?? null);
+      if (s?.user) {
+        const p = await fetchProfile(s.user.id);
+        setProfile(p);
+      }
       setIsLoading(false);
     });
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        
-        if (event === 'SIGNED_OUT') {
+      async (_event, s) => {
+        setSession(s);
+        setUser(s?.user ?? null);
+
+        if (s?.user) {
+          const p = await fetchProfile(s.user.id);
+          setProfile(p);
+        } else {
           setProfile(null);
         }
       }
@@ -63,13 +71,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return () => subscription.unsubscribe();
   }, []);
-
-  // Fetch profile when user changes
-  useEffect(() => {
-    if (user) {
-      refreshProfile();
-    }
-  }, [user, refreshProfile]);
 
   const signIn = async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
