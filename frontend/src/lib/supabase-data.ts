@@ -6,6 +6,17 @@ import type {
 } from '@/types';
 
 // ═══════════════════════════════════════════════════════════════════════════
+// Security: Contact field definitions
+// These fields are personal data under PDPA / Vietnamese data protection law.
+// They are protected by:
+//   1. RLS policies (DB-level, enforced for all API calls incl. direct REST)
+//   2. Middleware auth guard (route-level, blocks unauthenticated page access)
+// Only authenticated users with privacy_level < 2 access should see these.
+// NEVER expose these in public/unauthenticated queries.
+// ═══════════════════════════════════════════════════════════════════════════
+export const CONTACT_FIELDS = ['phone', 'email', 'zalo', 'facebook', 'address'] as const;
+
+// ═══════════════════════════════════════════════════════════════════════════
 // People CRUD
 // ═══════════════════════════════════════════════════════════════════════════
 

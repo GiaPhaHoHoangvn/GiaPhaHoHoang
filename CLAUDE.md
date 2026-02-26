@@ -2,7 +2,7 @@
 project: AncestorTree
 path: CLAUDE.md
 type: agent-guidelines
-version: 1.6.0
+version: 1.7.0
 updated: 2026-02-26
 ---
 
@@ -122,7 +122,7 @@ AncestorTree/
 │   ├── src/types/                  # TypeScript types
 │   │   └── index.ts                # All type definitions
 │   └── supabase/                   # Database migrations
-│       ├── migrations/             # Timestamped migration files (5)
+│       ├── migrations/             # Timestamped migration files (6)
 │       ├── config.toml             # Supabase CLI config (ports, storage)
 │       └── seed.sql                # Demo data: 18 thành viên 5 đời
 ├── .sdlc-config.json               # SDLC configuration
@@ -229,6 +229,7 @@ chore/upgrade-deps
 | Core DB Schema | `frontend/supabase/migrations/20260224000000_database_setup.sql` |
 | Sprint 6 Migration | `frontend/supabase/migrations/20260224000001_sprint6_migration.sql` |
 | Sprint 7 Migration | `frontend/supabase/migrations/20260224000002_cau_duong_migration.sql` |
+| Security Migration | `frontend/supabase/migrations/20260226000005_security_hardening.sql` |
 | Local Dev Guide | `docs/04-build/LOCAL-DEVELOPMENT.md` |
 | Sprint Plan | `docs/04-build/SPRINT-PLAN.md` |
 | Test Plan | `docs/05-test/TEST-PLAN.md` |

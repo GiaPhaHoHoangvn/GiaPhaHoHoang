@@ -2,7 +2,7 @@
 project: AncestorTree
 path: docs/04-build/SPRINT-PLAN.md
 type: build
-version: 1.6.0
+version: 1.7.0
 updated: 2026-02-26
 owner: "@pm"
 status: approved
@@ -34,7 +34,7 @@ Milestones:
 ├── v1.3.0 Culture  → End Sprint 6    ✅
 ├── v1.4.0 CauDuong → End Sprint 7    ✅
 ├── v1.5.0 Relations→ End Sprint 7.5  ✅
-└── v1.6.0 LocalDev → End Sprint 8    ✅
+└── v1.7.0 LocalDev+Security → End Sprint 8 ✅
 ```
 
 ---
@@ -419,8 +419,8 @@ Milestones:
 | **Sprint 6** | Culture | Honors, Fund, Scholarships, Charter | ~3,000 | ✅ |
 | **Sprint 7** | Ceremony | Cầu đương rotation + DFS algorithm | ~1,500 | ✅ |
 | **Sprint 7.5** | Relations | Family relations UX + tree filter | ~2,000 | ✅ |
-| **Sprint 8** | Local Dev | Supabase CLI + Docker, seed, setup | ~500 | ✅ |
-| **Total** | | | **~19,000** | **DONE** |
+| **Sprint 8** | LocalDev + Security | Supabase CLI + Docker + RLS hardening + middleware fix | ~1,200 | ✅ |
+| **Total** | | | **~19,700** | **DONE** |
 
 ---
 
@@ -456,6 +456,10 @@ Milestones:
 | Tree hierarchical layout | | | | | | | | ✅ | | DONE |
 | Tree-scoped editor | | | | | | | | ✅ | | DONE |
 | Local dev (Supabase CLI) | | | | | | | | | ✅ | DONE |
+| Middleware auth guard | | | | | | | | | ✅ | DONE |
+| RLS: profiles protected | | | | | | | | | ✅ | DONE |
+| RLS: contact data private | | | | | | | | | ✅ | DONE |
+| RLS: tables auth-gated | | | | | | | | | ✅ | DONE |
 
 ---
 
@@ -714,10 +718,11 @@ frontend/
 
 ---
 
-## 🏃 Sprint 8: Local Development Mode ✅
+## 🏃 Sprint 8: Local Development Mode + Security Hardening ✅
 
 **Dates:** Feb 26, 2026
-**Goal:** Cho phép cộng đồng chạy app local mà không cần tài khoản Supabase/Vercel
+**Goal:** Local dev offline + vá lỗ hổng bảo mật dữ liệu cá nhân
+**Version:** v1.7.0
 
 ### Business Context
 
@@ -730,7 +735,7 @@ Supabase CLI + Docker cho phép chạy **toàn bộ stack offline** với zero c
 - Node.js 18+, pnpm
 - Sprints 1-7.5 complete (all migrations ready)
 
-### Tasks
+### Tasks — Part A: Local Development
 
 | # | Task | Hours | Status |
 |---|------|:-----:|:------:|
@@ -745,8 +750,26 @@ Supabase CLI + Docker cho phép chạy **toàn bộ stack offline** với zero c
 | 9 | Update `README.md` + `CLAUDE.md` | 0.5h | ✅ |
 | 10 | End-to-end test: `supabase start` → `pnpm dev` → login → browse | 0.5h | ✅ |
 
+### Tasks — Part B: Security Hardening
+
+> Tham khảo: https://anninhthudo.vn — rủi ro lộ lọc dữ liệu cá nhân trên các nền tảng gia phả Việt Nam
+
+| # | Task | Issue | Hours | Status |
+|---|------|-------|:-----:|:------:|
+| 11 | Rename `proxy.ts` → `middleware.ts` (Next.js requires exact filename) | SEC-00: middleware was never executed | 0.25h | ✅ |
+| 12 | Extend middleware `authRequiredPaths` to cover ALL `(main)` routes | SEC-01: only `/admin` + `/contributions` were protected | 0.25h | ✅ |
+| 13 | Fix `profiles` RLS `SELECT USING (true)` → `auth.uid() IS NOT NULL` | SEC-02: any anonymous request could list all user emails + roles | 0.5h | ✅ |
+| 14 | Fix `people` RLS: strip contact fields from public/anon reads + add admin-only policy | SEC-03: phone/email/zalo/address exposed to unauthenticated API calls | 0.5h | ✅ |
+| 15 | Change `people.privacy_level` default `0` (public) → `1` (members only) | SEC-04: new entries accidentally public | 0.25h | ✅ |
+| 16 | Backfill: set `privacy_level = 1` for living members with contact data | SEC-05: existing data protection | 0.25h | ✅ |
+| 17 | Restrict `families`/`children`/`events`/`media` SELECT to authenticated users | SEC-06: structural data crawlable without login | 0.5h | ✅ |
+| 18 | Add `CONTACT_FIELDS` constant in `supabase-data.ts` (code-level documentation) | Defense in depth | 0.25h | ✅ |
+| 19 | Increase minimum password length 6 → 8 chars in register page | SEC-07: weak password policy | 0.25h | ✅ |
+| 20 | Add migration `20260226000005_security_hardening.sql` | All DB-level fixes in one migration | 0.5h | ✅ |
+
 ### Acceptance Criteria
 
+**Part A — Local Development:**
 - [x] `pnpm local:setup` khởi chạy Docker containers + tạo `.env.local`
 - [x] `pnpm dev` → login `admin@giapha.local` / `admin123` thành công
 - [x] Cây gia phả hiển thị 15-20 thành viên demo
@@ -755,23 +778,35 @@ Supabase CLI + Docker cho phép chạy **toàn bộ stack offline** với zero c
 - [x] `supabase db reset` xoá sạch + seed lại thành công
 - [x] `pnpm build` vẫn pass (cloud mode không ảnh hưởng)
 
+**Part B — Security Hardening:**
+- [x] Middleware thực sự chạy (file được đặt tên đúng `middleware.ts`)
+- [x] Người chưa đăng nhập không thể truy cập bất kỳ trang nào trong `(main)/`
+- [x] API Supabase (REST) không trả về email/số điện thoại thành viên khi chưa đăng nhập
+- [x] `profiles` table không bị liệt kê anon qua Supabase REST API
+- [x] Thành viên mới tạo mặc định `privacy_level = 1` (members only)
+- [x] Thành viên sống có contact data được backfill `privacy_level = 1`
+- [x] Mật khẩu tối thiểu 8 ký tự khi đăng ký
+
 ### File Structure
 
 ```text
 frontend/
 ├── supabase/
-│   ├── config.toml                              ✅ NEW
-│   ├── seed.sql                                 ✅ NEW
+│   ├── config.toml                                      ✅ NEW (8A)
+│   ├── seed.sql                                         ✅ NEW (8A)
 │   └── migrations/
-│       ├── 20260224000000_database_setup.sql    ✅ Moved
-│       ├── 20260224000001_sprint6_migration.sql ✅ Moved
-│       ├── 20260224000002_cau_duong_migration.sql ✅ Moved
-│       ├── 20260224000003_sprint75_migration.sql  ✅ Moved
-│       └── 20260224000004_storage_setup.sql     ✅ Moved
+│       ├── 20260224000000_database_setup.sql            ✅ Moved (8A)
+│       ├── 20260224000001_sprint6_migration.sql         ✅ Moved (8A)
+│       ├── 20260224000002_cau_duong_migration.sql       ✅ Moved (8A)
+│       ├── 20260224000003_sprint75_migration.sql        ✅ Moved (8A)
+│       ├── 20260224000004_storage_setup.sql             ✅ Moved (8A)
+│       └── 20260226000005_security_hardening.sql        ✅ NEW (8B)
 ├── scripts/
-│   └── local-setup.mjs                          ✅ NEW
-├── package.json                                 ✅ Modified
-└── .env.local.example                           ✅ Modified
+│   └── local-setup.mjs                                  ✅ NEW (8A)
+├── src/
+│   └── middleware.ts                                    ✅ Renamed from proxy.ts (8B)
+├── package.json                                         ✅ Modified (8A)
+└── .env.local.example                                   ✅ Modified (8A)
 ```
 
 ### Dependencies
@@ -781,8 +816,8 @@ frontend/
 
 ---
 
-**Status:** ✅ Sprints 1-8 Complete (v1.6.0)
+**Status:** ✅ Sprints 1-8 Complete (v1.7.0)
 
-*Updated: 2026-02-26 — Sprint 8 complete: Local Development Mode (Supabase CLI + Docker).*
+*Updated: 2026-02-26 — Sprint 8 complete: Local Development Mode (Supabase CLI + Docker) + Security Hardening (RLS, middleware, privacy defaults).*
 
 *SDLC Framework 6.1.1 - Stage 04 Build*

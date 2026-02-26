@@ -38,6 +38,12 @@ Phần mềm quản lý gia phả điện tử giúp gìn giữ và truyền th�
 - **Dữ liệu demo** - 18 thành viên 5 đời sẵn sàng sau `pnpm local:setup`
 - **Zero code change** - Cùng code base, chỉ khác env vars
 
+### Security (v1.7)
+- **Middleware bảo vệ toàn bộ** - Tất cả trang `(main)` yêu cầu đăng nhập, không chỉ `/admin`
+- **RLS cật nhật** - Số điện thoại, email, Zalo, địa chỉ chỉ hiển thị với thành viên đăng nhập
+- **Privacy mặc định an toàn** - Thành viên mới tạo mặc định chế độ `members only`
+- **profiles bảo vệ** - Danh sách tài khoản không có thể bị thu thập nếu chưa đăng nhập
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -122,7 +128,8 @@ AncestorTree/
 │           ├── 20260224000001_sprint6_migration.sql
 │           ├── 20260224000002_cau_duong_migration.sql
 │           ├── 20260224000003_sprint75_migration.sql
-│           └── 20260224000004_storage_setup.sql
+│           ├── 20260224000004_storage_setup.sql
+│           └── 20260226000005_security_hardening.sql
 ├── .sdlc-config.json               # SDLC configuration
 ├── CLAUDE.md                       # AI assistant guidelines
 └── README.md
@@ -150,7 +157,7 @@ Full SDLC documentation (9 docs, 141KB):
 | 00-Foundation | Vision, Problem Statement, Market Research, Business Case |
 | 01-Planning | BRD (77 FRs + 17 NFRs), Roadmap |
 | 02-Design | Technical Design (13 tables), UI/UX Design |
-| 04-Build | Sprint Plan (8 sprints, v1.6.0) |
+| 04-Build | Sprint Plan (8 sprints, v1.7.0) |
 
 See [docs/README.md](./docs/README.md) for full documentation index.
 
@@ -164,7 +171,8 @@ v1.2.0 Release  [##########] Done - GEDCOM + Book Generator + Photos
 v1.3.0 Culture  [##########] Done - Vinh danh + Quỹ khuyến học + Hương ước
 v1.4.0 Ceremony [##########] Done - Cầu đương rotation + DFS algorithm
 v1.5.0 Relations[##########] Done - Family relations UX + tree filter by root
-v1.6.0 LocalDev [##########] Done - Supabase CLI + Docker local mode
+v1.6.0 LocalDev  [##########] Done - Supabase CLI + Docker local mode
+v1.7.0 Security  [##########] Done - RLS hardening + middleware fix + privacy defaults
 v2.0.0 Community [----------] Future - Nhà thờ họ, Notifications, Cross-clan
 ```
 

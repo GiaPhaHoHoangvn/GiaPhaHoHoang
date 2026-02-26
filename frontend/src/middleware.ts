@@ -1,9 +1,9 @@
 /**
  * @project AncestorTree
- * @file src/proxy.ts
- * @description Auth proxy (middleware) for protected routes — Next.js 16 convention
- * @version 1.1.0
- * @updated 2026-02-25
+ * @file src/middleware.ts
+ * @description Auth middleware for protected routes — Next.js 16 convention
+ * @version 1.2.0
+ * @updated 2026-02-26
  */
 
 import { NextResponse } from 'next/server';
@@ -11,10 +11,16 @@ import type { NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
 const publicPaths = ['/login', '/register', '/forgot-password', '/reset-password'];
-// Routes that require authentication (redirect to login if not logged in)
-const authRequiredPaths = ['/admin', '/contributions'];
+// All main app routes require authentication to protect personal data.
+// Unauthenticated requests to these paths are redirected to /login.
+const authRequiredPaths = [
+  '/',
+  '/people', '/tree', '/directory', '/events',
+  '/achievements', '/charter', '/cau-duong', '/contributions',
+  '/documents', '/fund', '/admin',
+];
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   let response = NextResponse.next({
