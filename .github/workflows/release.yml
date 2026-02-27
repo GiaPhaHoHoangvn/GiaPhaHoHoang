@@ -44,6 +44,11 @@ jobs:
           ELECTRON_BUILD: 'true'
           NEXT_PUBLIC_DESKTOP_MODE: 'true'
 
+      - name: Copy static assets into standalone
+        run: |
+          cp -r frontend/.next/static frontend/.next/standalone/.next/static
+          cp -r frontend/public frontend/.next/standalone/public
+
       - name: Install desktop dependencies
         run: cd desktop && pnpm install --frozen-lockfile
 
@@ -93,6 +98,12 @@ jobs:
         env:
           ELECTRON_BUILD: 'true'
           NEXT_PUBLIC_DESKTOP_MODE: 'true'
+
+      - name: Copy static assets into standalone
+        run: |
+          xcopy frontend\.next\static frontend\.next\standalone\.next\static /E /I /Y
+          xcopy frontend\public frontend\.next\standalone\public /E /I /Y
+        shell: cmd
 
       - name: Install desktop dependencies
         run: cd desktop && pnpm install --frozen-lockfile

@@ -17,16 +17,9 @@ files:
   - build/**/*
 
 extraResources:
+  # standalone already contains .next/static and public (copied before build)
   - from: ../frontend/.next/standalone
     to: standalone
-    filter:
-      - "**/*"
-  - from: ../frontend/.next/static
-    to: standalone/.next/static
-    filter:
-      - "**/*"
-  - from: ../frontend/public
-    to: standalone/public
     filter:
       - "**/*"
   - from: ../desktop/migrations

@@ -133,9 +133,36 @@ if (process.platform === 'darwin') {
   }
 }
 
-// 3. Windows .ico — write 256x256 PNG (electron-builder accepts PNG path for ico)
+// 3. Windows .ico — proper ICO format with embedded PNG images
+const icoSizes = [16, 32, 48, 64, 128, 256];
+const pngImages = icoSizes.map(s => generatePNG(s, getPixel));
+
+// ICO header: reserved(2) + type=1(2) + count(2)
+const header = Buffer.alloc(6);
+header.writeUInt16LE(0, 0);
+header.writeUInt16LE(1, 2);     // type = icon
+header.writeUInt16LE(icoSizes.length, 4);
+
+// Directory entries (16 bytes each), then image data
+const dirSize = icoSizes.length * 16;
+let dataOffset = 6 + dirSize;
+const dirEntries = [];
+for (let i = 0; i < icoSizes.length; i++) {
+  const entry = Buffer.alloc(16);
+  entry[0] = icoSizes[i] >= 256 ? 0 : icoSizes[i]; // width (0 = 256)
+  entry[1] = icoSizes[i] >= 256 ? 0 : icoSizes[i]; // height
+  entry[2] = 0;  // color palette
+  entry[3] = 0;  // reserved
+  entry.writeUInt16LE(1, 4);  // color planes
+  entry.writeUInt16LE(24, 6); // bits per pixel
+  entry.writeUInt32LE(pngImages[i].length, 8);
+  entry.writeUInt32LE(dataOffset, 12);
+  dataOffset += pngImages[i].length;
+  dirEntries.push(entry);
+}
+
 const icoPath = path.join(buildDir, 'icon.ico');
-fs.writeFileSync(icoPath, generatePNG(256, getPixel));
-console.log(`✓ icon.ico (256x256, electron-builder will convert)`);
+fs.writeFileSync(icoPath, Buffer.concat([header, ...dirEntries, ...pngImages]));
+console.log(`✓ icon.ico (${icoSizes.join(', ')}px, proper ICO format)`);
 
 console.log('\n✅ Icons ready in desktop/build/');
