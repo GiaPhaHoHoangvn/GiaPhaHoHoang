@@ -1,3 +1,4 @@
+
 /**
  * @project AncestorTree (customized)
  * @file src/app/(landing)/welcome/page.tsx
@@ -11,10 +12,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Gia Phả Điện Tử Họ Hoàng - Con Cháu cụ Hiệu Diệu Sân',
+  title: 'Gia Phả Điện Tử Họ Hoàng - Con Cháu Cụ Hiệu Diệu Sân',
   description: 'Gìn giữ tinh hoa - Tiếp bước ông cha.',
   openGraph: {
-    title: 'Gia Phả Điện Tử Họ Hoàng - Con Cháu cụ Hiệu Diệu Sân',
+    title: 'Gia Phả Điện Tử Họ Hoàng - Con Cháu Cụ Hiệu Diệu Sân',
     description: 'Gìn giữ tinh hoa - Tiếp bước ông cha.',
     type: 'website',
     locale: 'vi_VN',
@@ -91,24 +92,23 @@ export default function WelcomePage() {
         </div>
       </header>
 
-      {/* Main */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         {/* Login section */}
         <section className="py-10 md:py-12">
           <div className="mx-auto max-w-2xl">
             <Card className="border-0 shadow-md">
               <CardHeader className="text-center space-y-3">
-                <CardTitle className="font-bold tracking-tight">
+                <CardTitle className="font-bold tracking-tight text-center">
                   <div className="text-2xl sm:text-3xl md:text-4xl">
                     Gia Phả Điện Tử Họ Hoàng
                   </div>
                   <div className="text-xl sm:text-2xl md:text-3xl mt-2">
-                    Con Cháu cụ Hiệu Diệu Sân
+                    Con Cháu Cụ Hiệu Diệu Sân
                   </div>
                 </CardTitle>
 
-                {/* Slogan: bigger (about 4x vs before) */}
-                <p className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-800">
+                {/* Slogan: small like "Đăng nhập" + light green like background */}
+                <p className="text-base sm:text-lg font-medium text-emerald-300">
                   Gìn giữ tinh hoa - Tiếp bước ông cha.
                 </p>
               </CardHeader>
