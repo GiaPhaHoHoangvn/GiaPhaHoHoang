@@ -1,7 +1,7 @@
 /**
  * @project AncestorTree
  * @file src/app/(landing)/welcome/page.tsx
- * @description Public landing page — 7 sections, Vietnamese-first, SSR static
+ * @description Public landing page — 9 sections, Vietnamese-first, SSR static
  * @version 1.0.0
  * @updated 2026-02-26
  */
@@ -10,7 +10,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
   GitBranch, Calendar, Users, Shield, Download, Bug, LogIn,
-  Lightbulb, MessageCircle, Code2, Heart, ExternalLink,
+  Lightbulb, MessageCircle, Code2, Heart,
   Monitor, Apple, ChevronRight, Award, BookOpen, Utensils,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -210,8 +210,124 @@ export default function WelcomePage() {
         </div>
       </section>
 
-      {/* ───── 4. Download (State B — Coming Soon) ───── */}
-      <section id="download" className="py-20 bg-gray-50">
+      {/* ───── 4. Hướng dẫn sử dụng ───── */}
+      <section id="guide" className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">Hướng dẫn sử dụng</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              Tổng quan các chức năng chính và cách sử dụng ứng dụng.
+            </p>
+          </div>
+
+          {/* Navigation overview */}
+          <div className="mb-14">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Thanh điều hướng</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 max-w-4xl mx-auto">
+              {[
+                { name: 'Trang chủ', desc: 'Tổng quan, thống kê' },
+                { name: 'Cây phả hệ', desc: 'Sơ đồ cây gia phả' },
+                { name: 'Thành viên', desc: 'Quản lý thành viên' },
+                { name: 'Thư mục', desc: 'Danh bạ liên lạc' },
+                { name: 'Sự kiện', desc: 'Ngày giỗ, lễ tết' },
+                { name: 'Vinh danh', desc: 'Thành tích con cháu' },
+                { name: 'Quỹ khuyến học', desc: 'Thu chi, học bổng' },
+                { name: 'Hương ước', desc: 'Gia huấn, quy ước' },
+                { name: 'Cầu đương', desc: 'Phân công cúng lễ' },
+                { name: 'Gia phả sách', desc: 'Xuất dạng sách' },
+                { name: 'Quản trị', desc: 'Cài đặt hệ thống' },
+              ].map((item) => (
+                <div key={item.name} className="bg-white rounded-lg px-4 py-3 border shadow-sm">
+                  <p className="font-medium text-sm text-gray-900">{item.name}</p>
+                  <p className="text-xs text-gray-500">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Key workflows */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-14">
+            {[
+              {
+                title: 'Thêm thành viên',
+                steps: [
+                  'Nhấn "Thêm thành viên" ở trang Thành viên',
+                  'Điền họ tên, giới tính, đời, năm sinh',
+                  'Chọn Cha/Mẹ để tự động tạo quan hệ',
+                  'Nhấn Lưu — thành viên xuất hiện trên cây',
+                ],
+              },
+              {
+                title: 'Xem cây gia phả',
+                steps: [
+                  'Vào Cây phả hệ từ thanh điều hướng',
+                  'Cuộn chuột để thu phóng, kéo để di chuyển',
+                  'Click vào thành viên để xem chi tiết',
+                  'Chọn "Xem cây từ đây" để lọc theo nhánh',
+                ],
+              },
+              {
+                title: 'Quản lý sự kiện & ngày giỗ',
+                steps: [
+                  'Ngày giỗ tự động tính từ ngày mất âm lịch',
+                  'Thêm sự kiện: Giỗ, Lễ/Tết, hoặc Khác',
+                  'Chọn ngày âm lịch và người liên quan',
+                  'Bật "Lặp lại hàng năm" cho ngày giỗ',
+                ],
+              },
+              {
+                title: 'Sao lưu dữ liệu (Desktop)',
+                steps: [
+                  'Dữ liệu lưu tại ~/AncestorTree/',
+                  'Copy thư mục ra USB hoặc Google Drive',
+                  'Khôi phục: copy ngược về ~/AncestorTree/',
+                  'Nên sao lưu ít nhất 1 lần/tháng',
+                ],
+              },
+            ].map((workflow) => (
+              <Card key={workflow.title}>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base">{workflow.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ol className="space-y-2">
+                    {workflow.steps.map((step, i) => (
+                      <li key={i} className="flex gap-3 text-sm text-gray-600">
+                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs flex items-center justify-center font-medium">
+                          {i + 1}
+                        </span>
+                        {step}
+                      </li>
+                    ))}
+                  </ol>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Usage tips */}
+          <div className="max-w-3xl mx-auto">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Mẹo sử dụng</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                'Bắt đầu từ thủy tổ — nhập thông tin từ đời cao nhất trở xuống',
+                'Chọn Cha/Mẹ ngay khi tạo thành viên để cây tự động cập nhật',
+                'Ghi ngày mất âm lịch — giúp tính ngày giỗ chính xác',
+                'Sao lưu thường xuyên — dữ liệu gia phả là tài sản vô giá',
+                'Dùng tìm kiếm khi gia phả lớn (>50 người) — nhanh hơn cuộn trang',
+              ].map((tip, i) => (
+                <div key={i} className="flex gap-3 bg-white rounded-lg px-4 py-3 border shadow-sm">
+                  <span className="flex-shrink-0 text-emerald-600 font-semibold text-sm">#{i + 1}</span>
+                  <p className="text-sm text-gray-600">{tip}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ───── 5. Download ───── */}
+      <section id="download" className="py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="text-3xl font-bold text-gray-900 mb-3">Tải về Desktop</h2>
@@ -229,12 +345,12 @@ export default function WelcomePage() {
                 <CardTitle className="text-lg">Windows</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Badge variant="outline">Sắp có</Badge>
+                <Badge className="bg-emerald-100 text-emerald-700">v2.1.0</Badge>
                 <p className="text-sm text-gray-500">Windows 10 trở lên &middot; .exe installer</p>
-                <Button variant="outline" className="w-full" asChild>
-                  <a href={GITHUB_RELEASES} target="_blank" rel="noopener noreferrer">
-                    Theo dõi GitHub Releases
-                    <ExternalLink className="ml-2 h-4 w-4" />
+                <Button className="w-full" asChild>
+                  <a href={`${GITHUB_RELEASES}/download/v2.1.0/AncestorTree.Setup.2.1.0.exe`}>
+                    <Download className="mr-2 h-4 w-4" />
+                    Tải AncestorTree.exe
                   </a>
                 </Button>
               </CardContent>
@@ -249,27 +365,106 @@ export default function WelcomePage() {
                 <CardTitle className="text-lg">macOS</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Badge variant="outline">Sắp có</Badge>
-                <p className="text-sm text-gray-500">macOS 12+ &middot; Universal (.dmg)</p>
-                <Button variant="outline" className="w-full" asChild>
-                  <a href={GITHUB_RELEASES} target="_blank" rel="noopener noreferrer">
-                    Theo dõi GitHub Releases
-                    <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
+                <Badge className="bg-emerald-100 text-emerald-700">v2.1.0</Badge>
+                <p className="text-sm text-gray-500">macOS 12+ &middot; Intel &amp; Apple Silicon</p>
+                <div className="flex gap-2">
+                  <Button className="flex-1" size="sm" asChild>
+                    <a href={`${GITHUB_RELEASES}/download/v2.1.0/AncestorTree-2.1.0-arm64.dmg`}>
+                      <Download className="mr-1 h-4 w-4" />
+                      Apple Silicon
+                    </a>
+                  </Button>
+                  <Button className="flex-1" size="sm" variant="outline" asChild>
+                    <a href={`${GITHUB_RELEASES}/download/v2.1.0/AncestorTree-2.1.0.dmg`}>
+                      <Download className="mr-1 h-4 w-4" />
+                      Intel
+                    </a>
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>
           <p className="text-center text-sm text-gray-400 mt-6">
-            Hiện hỗ trợ Windows và macOS. Xem chi tiết trên{' '}
+            Ứng dụng chưa được ký code (unsigned). macOS: System Settings &rarr; Privacy &amp; Security &rarr; Allow.
+            Windows: SmartScreen &rarr; More info &rarr; Run anyway.{' '}
             <a href={GITHUB_RELEASES} target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-600">
-              GitHub Releases
+              Tất cả phiên bản
             </a>.
           </p>
         </div>
       </section>
 
-      {/* ───── 5. Community ───── */}
+      {/* ───── 6. Câu hỏi thường gặp ───── */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">Câu hỏi thường gặp</h2>
+            <p className="text-gray-500">Giải đáp các thắc mắc phổ biến.</p>
+          </div>
+
+          {/* Desktop vs Web comparison */}
+          <div className="max-w-3xl mx-auto mb-12">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Desktop vs Web</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse bg-white rounded-lg overflow-hidden shadow-sm">
+                <thead>
+                  <tr className="bg-emerald-50">
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900" />
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Desktop</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Web</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  {[
+                    { label: 'Dữ liệu', desktop: 'Lưu trên máy (SQLite)', web: 'Cloud (Supabase)' },
+                    { label: 'Internet', desktop: 'Không cần', web: 'Cần kết nối' },
+                    { label: 'Người dùng', desktop: '1 người (admin)', web: 'Nhiều người, phân quyền' },
+                    { label: 'Cài đặt', desktop: 'Tải file, click cài', web: 'Cần Node.js, Docker' },
+                    { label: 'Chức năng', desktop: 'Giống nhau 100%', web: 'Giống nhau 100%' },
+                  ].map((row) => (
+                    <tr key={row.label}>
+                      <td className="px-4 py-3 text-sm font-medium text-gray-900">{row.label}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600">{row.desktop}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600">{row.web}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* FAQ items */}
+          <div className="max-w-3xl mx-auto space-y-4">
+            {[
+              {
+                q: 'Dữ liệu có mất khi cập nhật ứng dụng không?',
+                a: 'Không. Dữ liệu được lưu riêng trong thư mục ~/AncestorTree/, không bị ảnh hưởng khi cập nhật.',
+              },
+              {
+                q: 'Có thể chuyển dữ liệu từ Desktop sang Web không?',
+                a: 'Có. Sử dụng tính năng Export/Import (sẽ có trong phiên bản tương lai).',
+              },
+              {
+                q: 'Ứng dụng hỗ trợ bao nhiêu thành viên?',
+                a: 'Không giới hạn cứng. Đã test tốt với 500+ thành viên, 10+ đời.',
+              },
+              {
+                q: 'Ai có quyền chỉnh sửa dữ liệu?',
+                a: 'Bản Web: Admin toàn quyền, Editor thêm/sửa/xóa, Viewer chỉ xem, Guest xem công khai. Bản Desktop: bạn tự động là Admin.',
+              },
+            ].map((item) => (
+              <Card key={item.q}>
+                <CardContent className="pt-6">
+                  <h4 className="font-semibold text-gray-900 mb-2">{item.q}</h4>
+                  <p className="text-sm text-gray-600">{item.a}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───── 7. Community ───── */}
       <section className="py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
@@ -323,7 +518,7 @@ export default function WelcomePage() {
         </div>
       </section>
 
-      {/* ───── 6. For Developers ───── */}
+      {/* ───── 8. For Developers ───── */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
@@ -348,7 +543,7 @@ export default function WelcomePage() {
         </div>
       </section>
 
-      {/* ───── 7. Footer ───── */}
+      {/* ───── 9. Footer ───── */}
       <footer className="border-t bg-white py-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
