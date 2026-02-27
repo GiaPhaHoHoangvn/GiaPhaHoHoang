@@ -11,10 +11,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Gia Phả Điện Tử Dòng Họ Hoàng - Làng Phú Tàng',
+  title: 'Gia Phả Điện Tử Họ Hoàng - Con Cháu cụ Hiệu Diệu Sân',
   description: 'Gìn giữ tinh hoa - Tiếp bước ông cha.',
   openGraph: {
-    title: 'Gia Phả Điện Tử Dòng Họ Hoàng - Làng Phú Tàng',
+    title: 'Gia Phả Điện Tử Họ Hoàng - Con Cháu cụ Hiệu Diệu Sân',
     description: 'Gìn giữ tinh hoa - Tiếp bước ông cha.',
     type: 'website',
     locale: 'vi_VN',
@@ -97,11 +97,18 @@ export default function WelcomePage() {
         <section className="py-10 md:py-12">
           <div className="mx-auto max-w-2xl">
             <Card className="border-0 shadow-md">
-              <CardHeader className="text-center space-y-2">
-                <CardTitle className="text-2xl md:text-3xl font-bold">
-                  Gia Phả Điện Tử Dòng Họ Hoàng - Làng Phú Tàng
+              <CardHeader className="text-center space-y-3">
+                <CardTitle className="font-bold tracking-tight">
+                  <div className="text-2xl sm:text-3xl md:text-4xl">
+                    Gia Phả Điện Tử Họ Hoàng
+                  </div>
+                  <div className="text-xl sm:text-2xl md:text-3xl mt-2">
+                    Con Cháu cụ Hiệu Diệu Sân
+                  </div>
                 </CardTitle>
-                <p className="text-sm md:text-base text-gray-600">
+
+                {/* Slogan: bigger (about 4x vs before) */}
+                <p className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-800">
                   Gìn giữ tinh hoa - Tiếp bước ông cha.
                 </p>
               </CardHeader>
