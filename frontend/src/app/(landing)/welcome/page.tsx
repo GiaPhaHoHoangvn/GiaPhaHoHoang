@@ -23,14 +23,14 @@ const GITHUB_ISSUES = `${GITHUB_REPO}/issues`;
 const GITHUB_DISCUSSIONS = `${GITHUB_REPO}/discussions`;
 
 export const metadata: Metadata = {
-  title: 'AncestorTree — Gia Phả Điện Tử',
+  title: 'Gia Phả Điện Tử Họ Hoàng',
   description:
-    'Phần mềm mã nguồn mở quản lý gia phả điện tử. Cây gia phả tương tác, lịch âm dương, quản lý dòng họ. Miễn phí, tự host, có bản Desktop offline.',
+    'Phần mềm mã nguồn mở quản lý gia phả điện tử. Cây gia phả tương tác, lịch âm dương, quản lý dòng họ. .',
   alternates: {
     canonical: 'https://ancestortree.info/welcome',
   },
   openGraph: {
-    title: 'AncestorTree — Gia Phả Điện Tử',
+    title: 'Gia Phả Điện Tử Họ Hoàng',
     description: 'Gìn giữ tinh hoa — Tiếp bước cha ông',
     type: 'website',
     locale: 'vi_VN',
@@ -144,7 +144,7 @@ export default function WelcomePage() {
             <Button variant="link" className="text-emerald-200 hover:text-white" asChild>
               <Link href="/login">
                 <LogIn className="mr-2 h-4 w-4" />
-                Con cháu họ Đặng làng Kỷ Các — Đăng nhập
+                Con cháu cụ Hiệu Diệu Sân — Đăng nhập
               </Link>
             </Button>
           </div>
@@ -518,30 +518,6 @@ export default function WelcomePage() {
         </div>
       </section>
 
-      {/* ───── 8. For Developers ───── */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">Dành cho lập trình viên</h2>
-            <p className="text-gray-500 mb-8">
-              Mã nguồn mở MIT — fork, tùy chỉnh và deploy cho dòng họ của bạn trong 30 phút.
-            </p>
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
-              {techStack.map((t) => (
-                <Badge key={t} variant="secondary" className="text-sm">
-                  {t}
-                </Badge>
-              ))}
-            </div>
-            <Button asChild>
-              <a href={GITHUB_REPO} target="_blank" rel="noopener noreferrer">
-                <Code2 className="mr-2 h-5 w-5" />
-                Xem mã nguồn trên GitHub
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
 
       {/* ───── 9. Footer ───── */}
       <footer className="border-t bg-white py-10">
