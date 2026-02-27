@@ -1,6 +1,6 @@
-# AncestorTree
+# Họ Hoàng, Phú Tàng, Đa Phúc, Hà Nội
 
-> **Gia Phả Điện Tử - Họ Hoàng, Phú Tàng, Đa Phúc Hà Nội**
+> **Gia Phả Điện Tử - Họ Hoàng, Phú Tàng, Đa Phúc, Hà Nội**
 
 Phần mềm quản lý gia phả điện tử giúp gìn giữ và truyền thừa thông tin dòng họ qua các thế hệ.
 
@@ -109,7 +109,7 @@ pnpm dev
 
 Open [http://localhost:4000](http://localhost:4000)
 
-Demo login: `admin@giapha.local` / `admin123`
+Demo login: `admin` / `admin123`
 
 See [docs/04-build/LOCAL-DEVELOPMENT.md](./docs/04-build/LOCAL-DEVELOPMENT.md) for full guide.
 
@@ -237,7 +237,6 @@ AncestorTree is designed for **any Vietnamese family**:
 1. Tải file cài đặt từ [GitHub Releases](https://github.com/Minh-Tam-Solution/AncestorTree/releases)
 2. Cài đặt → Mở ứng dụng → Bắt đầu nhập dữ liệu
 
-Tổng thời gian: **5 phút**. Chi phí: **$0**.
 
 ### Cách nâng cao (Web App)
 
